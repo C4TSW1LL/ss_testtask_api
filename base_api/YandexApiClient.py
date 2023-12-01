@@ -3,7 +3,7 @@ import requests
 
 class YandexApiClient:
     url = "https://cloud-api.yandex.net/v1/disk/"
-    token = "y0_AgAAAAByb1ODAADLWwAAAADzbOpmCEE7bzh2Swq1KU1x5Gl1vooS0gA"
+    token = "..."
 
     @staticmethod
     def get_all_files():
