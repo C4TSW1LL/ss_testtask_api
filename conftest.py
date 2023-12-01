@@ -1,25 +1,10 @@
-import pytest
-from base_api.yandex_api import YandexApi
+import requests
 
 
-@pytest.fixture
-def api(get_token, url, path):
-    fch = YandexApi(url, path, get_token)
-    return fch
+class ApiClient():
+    url = "https://cloud-api.yandex.net/v1/disk/"
+    token = 'y0_AgAAAAByb1ODAADLWwAAAADzbOpmCEE7bzh2Swq1KU1x5Gl1vooS0gA'
 
-
-@pytest.fixture
-def get_token():
-    token = '...'
-    return token
-
-
-@pytest.fixture
-def url():
-    url = 'https://cloud-api.yandex.net/v1/disk/'
-    return url
-
-@pytest.fixture
-def path():
-    path = "resources?path=disk%3A%2F"
-    return path
+    def get_all_files(self):
+        response = requests.request(method='get', url=self.url + "resources?path=disk%3A%2F", headers=dict(authorization=f'OAuth {self.token}'))
+        return response.status_code, response.json()
