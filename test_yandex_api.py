@@ -1,13 +1,12 @@
 from base_api.parser import Parser
-from conftest import ApiClient
+from base_api.YandexApiClient import YandexApiClient
 
 
 class TestYandexApi:
 
     def test_get_all_file_name(self):
-        api = ApiClient()
-        status_code, response = api.get_all_files()
-        names = Parser.get_all_name(response)
+        response = YandexApiClient.get_all_files()
+        names = Parser.get_all_name(response.json())
 
-        assert status_code == 200
-        assert names != {}
+        assert response.status_code == 200
+        assert names.get("name") != [""]
